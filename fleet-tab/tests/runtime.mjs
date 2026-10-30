@@ -25,9 +25,9 @@ export function nodes(tree) { return typeof tree !== "object" || tree === null ?
 export const find = (tree, id) => nodes(tree).find(node => node.idValue === id);
 export const textOf = tree => typeof tree === "string" ? tree : tree?.kids?.map(textOf).join(" ") ?? "";
 
-export async function runtime({ empty = false, store = new Map(), disk = new Map() } = {}) {
+export async function runtime({ empty = false, windowPresent = true, store = new Map(), disk = new Map() } = {}) {
   const state = { agents: empty ? [] : structuredClone(fixtures.agents), terminals: empty ? [] : structuredClone(fixtures.terminals),
-    spaces: empty ? [] : structuredClone(fixtures.spaces), panes: [], active: true, props: {}, commands: [], overlays: [], order: [],
+    spaces: empty ? [] : structuredClone(fixtures.spaces), panes: [], active: true, windowPresent, props: {}, commands: [], overlays: [], order: [],
     checks: [], reply: { code: 0, stdout: '{"terminals":[]}' }, timers: [], jobs: [], notifications: 0 };
   state.panes = state.agents.map(a => ({ pane: a.pane, terminal: a.address, tab: a.tab, title: a.title, status: a.status, focused: a.focused, program: a.program }));
   const context = vm.createContext({ Date, console, localStorage: { getItem: key => disk.get(key) ?? null, setItem: (key, value) => disk.set(key, value) } });
@@ -35,7 +35,7 @@ export async function runtime({ empty = false, store = new Map(), disk = new Map
   const api = {
     agents: () => state.agents, terminals: () => state.terminals, spaces: () => state.spaces, panes: () => state.panes,
     focused: () => state.spaces.length ? { space: "api", tab: "build" } : null, props: () => state.props,
-    theme: () => Object.fromEntries(colorNames.map(name => [name, name])), window: () => ({ active: state.active, platform: "macos", buttons: false }),
+    theme: () => Object.fromEntries(colorNames.map(name => [name, name])), window: () => state.windowPresent ? ({ active: state.active, platform: "macos", buttons: false }) : null,
     shared: key => store.get(key), setShared: (key, value) => store.set(key, value), setAgentOrder: list => { state.order = list; },
     run: (name, args) => state.commands.push({ name, args }), hc: async args => { state.checks.push(args); return await state.reply; },
     openOverlay: options => state.overlays.push(options), closeOverlay: id => state.overlays.push({ closed: id })

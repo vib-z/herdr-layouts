@@ -11,7 +11,8 @@ const text = (value, tint = theme().foreground, size = TYPE.body) => div().text_
 const base = () => v_flex().font_family("Geist Mono").text_size(TYPE.body).line_height(px(S.line)).text_color(theme().foreground);
 const color = status => status === "blocked" ? theme().blocked : status === "working" ? theme().accent : status === "done" ? theme().foreground : theme().dim;
 const liveRows = () => collectRows(agents(), terminals(), spaces());
-const motion = () => !preferences(shared).still && appWindow().active;
+const windowState = () => appWindow() ?? { active: false };
+const motion = () => !preferences(shared).still && windowState().active === true;
 const focus = a => { const command = focusCommand(a); if (command) run(command.name, command.args); };
 const stateLabel = a => a.rawDone ? "finished (child)" : STATUS[a.status] ?? "shell";
 function button(id, label, click, { selected = false, round = false } = {}) {
@@ -55,7 +56,7 @@ export default class FleetTab extends View {
       this.clocks = new Map(this.history.map(a => [a.address, a]));
       this.input = InputState.new({ placeholder: "Search agents, hosts, projects" });
       this.input.on("change", (_e, cx) => { this.query = this.input.value(); cx.notify(); });
-      cx.timer.every(1000, cx => { if (!this.closed && appWindow().active) cx.notify(); });
+      cx.timer.every(1000, cx => { if (!this.closed && windowState().active === true) cx.notify(); });
       cx.timer.every(EXIT_INTERVAL, cx => this.refreshExits(cx));
     }
   }
@@ -76,7 +77,7 @@ export default class FleetTab extends View {
       ...missingRows(this.history, live, raw)];
   }
   refreshExits(cx) {
-    if (this.closed || this.pending || !appWindow().active) return;
+    if (this.closed || this.pending || windowState().active !== true) return;
     if (!this.rows().some(a => a.status === "unavailable")) return;
     this.pending = true;
     cx.spawn(async cx => {
@@ -90,7 +91,7 @@ export default class FleetTab extends View {
         localStorage.setItem("fleet-tab.history", JSON.stringify(this.history));
         this.exitMessage = "";
       } catch (_) { this.exitMessage = "Exit check unavailable"; }
-      finally { this.pending = false; if (!this.closed && appWindow().active) cx.notify(); }
+      finally { this.pending = false; if (!this.closed && windowState().active === true) cx.notify(); }
     });
   }
   row(a, minimal, pinned = false) {
@@ -171,7 +172,7 @@ export default class FleetTab extends View {
   }
   topbar() {
     const space = spaces().find(s => s.active);
-    return h_flex().id("fleet-topbar-root").size_full().pl(appWindow().platform === "macos" ? S.macInset : S.topbarInset).pr(S.gutter).gap(S.gutter).items_center()
+    return h_flex().id("fleet-topbar-root").size_full().pl(windowState().platform === "macos" ? S.macInset : S.topbarInset).pr(S.gutter).gap(S.gutter).items_center()
       .bg(theme().chrome).font_family("Geist Mono")
       .on_size_change(({ width }) => {
         if (!Number.isFinite(width) || width <= 0) return;
@@ -185,7 +186,7 @@ export default class FleetTab extends View {
       .child(div().flex_1())
       .child(button("fleet-motion", preferences(shared).still ? "Motion off" : "Motion on", () => setShared("fleet-tab.still", !preferences(shared).still)))
       .child(button("fleet-command", "Command", () => run("app.palette")))
-      .when(appWindow().buttons, el => el.children([
+      .when(windowState().buttons, el => el.children([
         button("fleet-window-min", "Min", () => run("window.minimize")),
         button("fleet-window-max", "Max", () => run("window.maximize")),
         button("fleet-window-close", "Close", () => run("window.close"))]));

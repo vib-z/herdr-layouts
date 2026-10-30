@@ -61,6 +61,22 @@ test("native frames and data clocks pause inactive; still mode removes animation
   const before = rt.state.notifications; rt.state.timers.find(t => t.ms === 1000).fn(rt.cx); assert.equal(rt.state.notifications, before);
   sidebar.view.refreshExits(rt.cx); assert.equal(rt.state.checks.length, 0);
 });
+test("a null window renders all roles without an active workspace and skips animation, timers and reads", async () => {
+  const rt = await runtime({ windowPresent: false }), sidebar = rt.create("sidebar");
+  assert.equal(nodes(sidebar.render()).some(n => n.style.frames), false);
+  // Remember agents before removing them, so an exit read would otherwise be due.
+  rt.state.agents = []; rt.state.terminals = []; rt.state.spaces = []; rt.state.panes = [];
+  assert.ok(textOf(sidebar.render()).includes("UNAVAILABLE"));
+  for (const role of ["sidebar", "topbar", "tabs", "pane", "status", "group", "activity", "spaces"])
+    assert.doesNotThrow(() => rt.create(role).render());
+  const topbar = rt.create("topbar").render();
+  assert.equal(topbar.style.pl[0], S.topbarInset);
+  assert.equal(nodes(topbar).some(n => n.idValue?.startsWith("fleet-window-")), false);
+  const notifications = rt.state.notifications;
+  for (const timer of rt.state.timers) timer.fn(rt.cx);
+  assert.equal(rt.state.notifications, notifications);
+  assert.equal(rt.state.checks.length, 0); assert.equal(rt.state.jobs.length, 0);
+});
 test("tabs are amber pills and cards omit redundant status while retaining meaningful detail", async () => {
   const rt = await runtime(), tabs = rt.create("tabs").render();
   assert.equal(find(tabs, "fleet-tab-build").style.bg[0], "accent");

@@ -146,4 +146,36 @@ for(const [width,height] of [[960,842],[907.2,824]]) {
 nodes=[];wide.blueprint({id:'branchless',name:'api',branch:null},0,0,300,600,[],[]);
 assert(!allText().includes('No branch reported'));
 assert(!nodes.some(n=>n.children.includes('null')));
-console.log('PASS: all roles empty and 60-character title, core helper exit confirmation, wide/compact paging, attention, focus routing and motion');
+context.appWindow=()=>null;
+context.hc=()=>assert.fail('A missing window must not read core metadata');
+sharedValues.set('crew-board.still',false);
+for(const snapshot of [
+  {agents:[],terminals:[],spaces:[],panes:[]},
+  {...fixture,spaces:fixture.spaces.map(s=>({...s,active:false,tabs:s.tabs.map(t=>({...t,active:false}))}))},
+]) {
+  state=snapshot;stored=new Map();
+  for(const role of [undefined,'wall','topbar','header','burn']) {
+    build(role);
+    assert(nodes.length>0,`No window: ${role ?? 'default'} renders`);
+    assert(!nodes.some(n=>n.attrs.loop||n.attrs.spring||n.attrs.transition||n.attrs.frames),'No window means no motion');
+    if(role==='topbar') {
+      assert.equal(byId('crew-topbar').attrs.pl[0],20,'No window uses non-mac inset');
+      for(const id of ['minimize','maximize','close']) assert(!byId(id),'No window buttons without a window');
+    }
+  }
+  build('header',600,31,{pane:'absent'});
+  build('burn',250,100,{address:'gone',title:'Finished task'});
+}
+const timerCallbacks=[];
+const nullCx={...cx,notify:()=>assert.fail('No window timer must notify'),timer:{every:(_ms,fn)=>timerCallbacks.push(fn)}};
+currentProps={role:'wall'};
+const nullWall=new CrewBoard();nullWall.init(currentProps,nullCx);nullWall.history=[{...dead,exit:null}];
+context.agents=()=>assert.fail('Inactive exit check must skip live data reads');
+context.terminals=()=>assert.fail('Inactive exit check must skip terminal reads');
+assert.equal(timerCallbacks.length,2);
+for(const callback of timerCallbacks) callback(nullCx);
+nullWall.checkExits(nullCx);
+assert.equal(nullWall.pending,false);
+context.appWindow=()=>({active:'yes'});
+for(const callback of timerCallbacks) callback(nullCx);
+console.log('PASS: null-window roles, no-work timers, empty/long-title states, core helper exit confirmation, paging, attention, focus routing and motion');

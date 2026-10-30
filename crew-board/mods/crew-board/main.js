@@ -8,7 +8,8 @@ import { planSheets, PHOTO_HEIGHT, CARD_HEIGHT, deskStringRoute } from "./geomet
 const ASSET = "mods/crew-board/";
 const PAPER = "#f0e5c9", INK = "#302e28", CHALK = "#dce9df";
 const COPY = { working: "ON THE JOB", done: "GOT THE GOODS", blocked: "NEEDS YOU", idle: "LAYING LOW", dead: "BUSTED", unavailable: "UNAVAILABLE" };
-const motion = () => shared("crew-board.still") !== true && appWindow().active;
+const windowState = () => appWindow() ?? { active: false };
+const motion = () => shared("crew-board.still") !== true && windowState().active === true;
 const liveCrew = () => collectCrew(agents(), terminals(), spaces());
 const color = status => status === "dead" ? theme().blocked : theme()[status] ?? theme().muted;
 const dot = (c, size = 7) => div().size(size).rounded(size).bg(c).flex_none();
@@ -49,7 +50,7 @@ export default class CrewBoard extends View {
     this.wheelDistance = 0;
     if ((props()?.role ?? "wall") === "wall") {
       cx.timer.every(5000, cx => this.checkExits(cx));
-      cx.timer.every(60000, cx => { if (appWindow().active) cx.notify(); });
+      cx.timer.every(60000, cx => { if (windowState().active === true) cx.notify(); });
     }
   }
   persist() {
@@ -66,7 +67,7 @@ export default class CrewBoard extends View {
     }
   }
   checkExits(cx) {
-    if (this.pending || !appWindow().active) return;
+    if (this.pending || windowState().active !== true) return;
     const missing = missingCrew(this.history, liveCrew(), terminals()).filter(a => a.status === "unavailable");
     if (!missing.length) return;
     this.pending = true;
@@ -89,7 +90,7 @@ export default class CrewBoard extends View {
     const phone = label(blocked.length ? "RING" : "LINE CLEAR", 10, blocked.length ? theme().blocked : theme().muted)
       .id("burner-text").w(narrow ? 62 : 78);
     if (blocked.length && motion()) phone.frames(["RING", "RING RING"], 1600);
-    return h_flex().id("crew-topbar").size_full().pl(appWindow().platform === "macos" ? 86 : 20).pr(18).gap(15)
+    return h_flex().id("crew-topbar").size_full().pl(windowState().platform === "macos" ? 86 : 20).pr(18).gap(15)
       .items_center().bg(theme().chrome).border_b(1).border_color(theme().border)
       .on_size_change((size, cx) => {
         this.size = size;
@@ -111,7 +112,7 @@ export default class CrewBoard extends View {
         .child(svg(ASSET + "phone.svg").size(17).text_color(blocked.length ? theme().blocked : theme().muted))
         .child(phone).child(label(String(blocked.length).padStart(2, "0"), 13, theme().foreground)))
       .child(button("still", shared("crew-board.still") === true ? "STILL: ON" : "STILL: OFF", () => setShared("crew-board.still", shared("crew-board.still") !== true)))
-      .when(appWindow().buttons, el => el.children([
+      .when(windowState().buttons, el => el.children([
         button("minimize", "_", () => run("window.minimize")),
         button("maximize", "[]", () => run("window.maximize")),
         button("close", "X", () => run("window.close"))]));
