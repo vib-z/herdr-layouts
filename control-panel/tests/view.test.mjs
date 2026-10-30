@@ -20,7 +20,7 @@ const methods = kit ? new Set([...kit.matchAll(/^\s+([a-z_][a-z_0-9]*)(?:<[^\n]+
 async function harness(role = "overview", populated = true, storage = new Map(), now = f.now) {
   const state = {
     agents: populated ? structuredClone(f.agents) : [], terminals: populated ? structuredClone(f.terminals) : [],
-    spaces: populated ? structuredClone(f.spaces) : [], panes: [], props: { role }, active: true,
+    spaces: populated ? structuredClone(f.spaces) : [], panes: [], props: { role }, active: true, noWindow: false,
     now, shared: new Map(), layout: structuredClone(layout), calls: [], tasks: [], timers: [], storage,
     order: [], hc: async args => ({ code: 0, stdout: args[0] === "read" ? `\x1b[32m${f.lines[args[1]] ?? "ready"}\x1b[0m\n\n` : '{"terminals":[]}', stderr: "" })
   };
@@ -47,7 +47,7 @@ async function harness(role = "overview", populated = true, storage = new Map(),
   const api = {
     agents: () => state.agents, terminals: () => state.terminals, spaces: () => state.spaces, panes: () => state.panes,
     props: () => state.props, run: (...args) => { state.calls.push({ kind: "run", args }); },
-    theme: () => ({ ...themeData, ...themeData.colors }), window: () => ({ active: state.active, platform: "macos", buttons: false }),
+    theme: () => ({ ...themeData, ...themeData.colors }), window: () => state.noWindow ? null : ({ active: state.active, platform: "macos", buttons: false }),
     shared: key => state.shared.get(key), setShared: (key, value) => state.shared.set(key, value),
     setAgentOrder: value => { state.order = value; }, layout: () => state.layout,
     hc: async args => { state.calls.push({ kind: "hc", args: [...args] }); return state.hc([...args]); },
@@ -110,6 +110,34 @@ test("every role renders safely with no space, no tab, no focused pane or agents
     if (role === "overview") assert.match(content(tree), /No agents reporting a state/);
     if (role === "livebar") assert.match(content(tree), /No active tab/);
   }
+});
+test("every role renders with a null window, zero agents and no active workspace", async () => {
+  for (const empty of [true, false]) {
+    for (const role of ["overview", "topbar", "livebar", "pane", "tabs"]) {
+      const { view, state } = await harness(role, false);
+      state.noWindow = true;
+      if (!empty) state.spaces = structuredClone(f.spaces).map(space => ({ ...space, active: false,
+        tabs: space.tabs.map(tab => ({ ...tab, active: false })) }));
+      let tree;
+      assert.doesNotThrow(() => { tree = view.render(); });
+      if (role === "overview") assert.match(content(tree), /reads paused/);
+      if (role === "livebar") assert.match(content(tree), /No active tab/);
+      assert.equal(state.calls.length, 0);
+    }
+  }
+});
+test("a null window disables motion and terminal polling even with populated rows", async () => {
+  const { view, state, cx, flush } = await harness();
+  state.noWindow = true;
+  view.measured = true;
+  view.history.push({ ...f.history[0], exit: null });
+  const tree = view.render();
+  assert.match(content(tree), /reads paused/);
+  assert.ok(walk(tree).every(node => !node.attrs.frames));
+  view.refreshLines(cx);
+  view.refreshExits(cx);
+  await flush();
+  assert.equal(state.calls.length, 0);
 });
 test("rendered elapsed uses the persisted observed clock when core timestamps are absent or stale", async () => {
   const { view, state } = await harness();

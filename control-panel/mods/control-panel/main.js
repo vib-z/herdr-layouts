@@ -8,8 +8,9 @@ import { CELL, FONT, ROW, HISTORY_LIMIT, READ_INTERVAL, EXIT_INTERVAL, STATUS, p
   panelSlices, readableRows, nodeVisible } from "./model.js";
 
 const liveRows = () => collectRows(agents(), terminals(), spaces());
-const motion = () => shared("control-panel.still") !== true && appWindow().active;
-const active = () => appWindow().active && nodeVisible(layout(), "control-panel-overview");
+const windowState = () => appWindow() ?? { active: false };
+const motion = () => shared("control-panel.still") !== true && windowState().active === true;
+const active = () => windowState().active === true && nodeVisible(layout(), "control-panel-overview");
 const color = status => status === "blocked" ? theme().blocked :
   status === "working" || status === "done" ? theme().accent : status === "idle" ? theme().dim : theme().muted;
 const text = (value, tint = theme().foreground) => div().text_size(FONT).text_color(tint).child(String(value));
@@ -131,7 +132,7 @@ export default class ControlPanel extends View {
   }
   topbar() {
     const rows = liveRows(), blocked = rows.filter(a => a.status === "blocked");
-    return h_flex().id("control-panel-bar").size_full().pl(appWindow().platform === "macos" ? 88 : 24).pr(16)
+    return h_flex().id("control-panel-bar").size_full().pl(windowState().platform === "macos" ? 88 : 24).pr(16)
       .gap(24).items_center().bg(theme().chrome).text_size(FONT).font_family("JetBrains Mono")
       .child(text("CONTROL PANEL").font_semibold())
       .child(text(`${String(rows.length).padStart(2, "0")} agents / ${String(spaces().length).padStart(2, "0")} spaces`, theme().muted))
@@ -140,7 +141,7 @@ export default class ControlPanel extends View {
       .child(button("control-panel-still", shared("control-panel.still") === true ? "Motion off" : "Motion on",
         () => setShared("control-panel.still", shared("control-panel.still") !== true)))
       .child(button("control-panel-command", "Command", () => run("app.palette")))
-      .when(appWindow().buttons, el => el.children([
+      .when(windowState().buttons, el => el.children([
         button("control-panel-min", "Min", () => run("window.minimize")),
         button("control-panel-max", "Max", () => run("window.maximize")),
         button("control-panel-close", "Close", () => run("window.close"))]));
@@ -203,7 +204,7 @@ export default class ControlPanel extends View {
     this.starts = { blocked: slices.blocked.offset, rest: slices.rest.offset };
     setAgentOrder([...slices.blocked.rows, ...rows.filter(a => a.status === "blocked" && !slices.blocked.rows.includes(a)),
       ...rows.filter(a => !["blocked", "dead", "unavailable"].includes(a.status))].map(a => a.address));
-    const info = !appWindow().active ? "reads paused" : this.exitLabel || "screen reads every 5s";
+    const info = windowState().active !== true ? "reads paused" : this.exitLabel || "screen reads every 5s";
     return base().id("control-panel-overview-root").size_full().min_h(0).bg(theme().canvas).overflow_hidden()
       .on_size_change((size, cx) => {
         if (!this.measured || size.width !== this.size.width || size.height !== this.size.height) {
