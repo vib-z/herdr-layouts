@@ -1,0 +1,29 @@
+{
+  "id": "crew-root", "type": "column", "titlebar": "none", "traffic_lights": [18, 20],
+  "theme": "crew-board", "preview": "mods/crew-board/preview.svg",
+  "font": "JetBrains Mono", "font_size": 13, "ui_font": "Geist Mono",
+  "terminal_padding": [12, 12], "terminal_opacity": 1,
+  "background": "chrome", "resizable": false,
+  "children": [
+    { "id": "crew-topbar", "type": "block", "size": { "px": 58 }, "window_drag": true,
+      "content": { "mod": "crew-board", "props": { "role": "topbar" } } },
+    { "id": "crew-body", "type": "row", "resizable": false, "gap": 0,
+      "children": [
+        { "id": "crew-wall", "type": "block", "size": { "weight": 3 }, "min": 280,
+          "background": { "image": "mods/crew-board/cork.svg", "fit": "cover" },
+          "content": { "mod": "crew-board", "props": { "role": "wall" } } },
+        { "id": "crew-van", "type": "column", "size": { "weight": 2 }, "min": 420,
+          "resizable": false, "background": "canvas", "padding": [0, 12], "gap": 0,
+          "children": [
+            { "id": "crew-van-title", "type": "block", "size": { "px": 48 },
+              "content": { "mod": "crew-board", "props": { "role": "header" } } },
+            { "id": "crew-live", "type": "block", "content": { "tab": "active", "pane": {
+              "gap": 12, "radius": 3, "background": "background", "lone": true,
+              "border": { "width": 1, "color": "border" }, "focus": { "width": 2, "color": "accent" },
+              "header": { "content": { "mod": "crew-board", "props": { "role": "header" } },
+                "height": 31, "position": "top", "reveal": "always" }
+            } } }
+          ] }
+      ] }
+  ]
+}

@@ -1,0 +1,5 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="512" height="128" viewBox="0 0 512 128">
+  <defs><pattern id="slash" patternUnits="userSpaceOnUse" width="14" height="14"><path d="M-2 14 14-2M12 16 16 12" fill="none" stroke="#ffffff" stroke-opacity="0.055" stroke-width="1"/></pattern></defs>
+  <rect width="512" height="128" fill="url(#slash)"/>
+  <path d="M0 2h512M0 126h512" stroke="#ffffff" stroke-opacity="0.06"/>
+</svg>

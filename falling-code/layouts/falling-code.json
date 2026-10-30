@@ -1,0 +1,49 @@
+{
+  "id": "falling-code-root",
+  "type": "column",
+  "theme": "falling-code",
+  "preview": "layouts/falling-code.svg",
+  "font": "JetBrains Mono",
+  "font_size": 14,
+  "ui_font": "Geist Mono",
+  "terminal_padding": [12, 10],
+  "terminal_opacity": 0.92,
+  "background": "#020604",
+  "resizable": false,
+  "children": [
+    {
+      "id": "falling-code-rain",
+      "type": "block",
+      "size": { "weight": 2 },
+      "min": 250,
+      "content": { "mod": "falling-code", "props": { "role": "rain" } }
+    },
+    {
+      "id": "falling-code-alert",
+      "type": "block",
+      "size": { "px": 28 },
+      "content": { "mod": "falling-code", "props": { "role": "alert" } }
+    },
+    {
+      "id": "falling-code-terminals",
+      "type": "block",
+      "size": { "weight": 3 },
+      "content": {
+        "tab": "active",
+        "pane": {
+          "gap": 6,
+          "radius": 0,
+          "border": { "width": 1, "color": "border" },
+          "focus": { "width": 1, "color": "accent" },
+          "header": {
+            "content": { "mod": "falling-code", "props": { "role": "header" } },
+            "height": 30,
+            "position": "top",
+            "reveal": "always"
+          },
+          "lone": true
+        }
+      }
+    }
+  ]
+}

@@ -1,0 +1,30 @@
+{
+  "id": "queue-root",
+  "type": "column",
+  "theme": { "light": "paper", "dark": "graphite" },
+  "preview": "mods/queue/preview.svg",
+  "ui_font": "Geist",
+  "font": "JetBrains Mono",
+  "font_size": 13,
+  "terminal_padding": [10, 8],
+  "colors": { "accent": "#8a78e8", "blocked": "#df674b" },
+  "background": "canvas",
+  "gap": 0,
+  "resizable": false,
+  "children": [
+    { "id": "queue-bar", "type": "block", "size": { "px": 36 }, "content": { "mod": "queue", "props": { "role": "bar" } } },
+    {
+      "id": "queue-body", "type": "row", "divider": { "width": 1, "color": "border" },
+      "children": [
+        { "id": "queue-list", "type": "block", "size": { "weight": 3 }, "min": 300, "content": { "mod": "queue", "props": { "role": "list" } } },
+        { "id": "queue-work", "type": "column", "size": { "weight": 7 }, "min": 400, "padding": 8, "gap": 4, "resizable": false,
+          "children": [
+            { "id": "queue-context", "type": "block", "size": { "px": 32 }, "content": { "mod": "queue", "props": { "role": "context" } } },
+            { "id": "queue-terminals", "type": "block", "content": { "tab": "active", "pane": { "gap": 4, "radius": 4, "background": "background", "lone": true, "border": { "width": 1, "color": "border" }, "focus": { "width": 1, "color": "accent" } } } },
+            { "id": "queue-help", "type": "block", "size": { "px": 46 }, "content": { "mod": "queue", "props": { "role": "footer" } } }
+          ]
+        }
+      ]
+    }
+  ]
+}

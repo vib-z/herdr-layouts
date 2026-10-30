@@ -1,0 +1,21 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="800" height="450" viewBox="0 0 800 450">
+  <defs><linearGradient id="sky" x2="0" y2="1"><stop stop-color="#192344"/><stop offset="1" stop-color="#080e20"/></linearGradient></defs>
+  <rect width="800" height="450" fill="url(#sky)"/>
+  <g fill="#e2e8f6" font-family="monospace"><text x="30" y="32" font-size="16">N I G H T  C I T Y</text><text x="30" y="55" font-size="10">Illustrated layout preview</text></g>
+  <circle cx="747" cy="47" r="17" fill="#e9e3c9"/>
+  <g fill="#17223b" stroke="#586684"><path d="M40 119h112v138H40zM177 158h112v99H177zM314 96h112v161H314zM451 140h112v117H451zM657 113h112v144H657z"/></g>
+  <g fill="#e2e8f6" font-size="12" font-family="monospace"><text x="54" y="136">api</text><text x="191" y="175">docs</text><text x="328" y="113">web</text><text x="465" y="157">ops</text><text x="671" y="130">remote</text></g>
+  <g fill="#f1cf83"><path d="M54 154h18v20H54zM78 154h18v20H78zM54 183h18v20H54zM328 133h18v20H328zM465 177h18v20H465zM671 150h18v20H671z"/></g>
+  <g fill="#3b5880"><path d="M102 154h18v20h-18zM78 183h18v20H78zM191 191h18v20h-18zM352 162h18v20h-18zM489 177h18v20h-18zM695 150h18v20h-18z"/></g>
+  <path d="M376 133h18v20h-18z" fill="#b63b50"/>
+  <path d="M328 162h18v20h-18zM215 191h18v20h-18z" fill="#c5f4dc"/>
+  <path d="M102 183h18v20h-18z" fill="#11182a" stroke="#8490a5"/>
+  <path d="m104 186 14 14m-14 0 14-14" stroke="#8490a5"/>
+  <rect x="314" y="72" width="112" height="18" rx="2" fill="#4b1c32" stroke="#ff9097"/>
+  <text x="325" y="85" fill="#ffe7ea" font-family="monospace" font-size="11">NEEDS YOU</text>
+  <rect x="587" y="80" width="44" height="178" fill="#142b46"/>
+  <path d="M563 230h94" stroke="#8d9ab5" stroke-width="4"/>
+  <path d="M0 265h800" stroke="#8792aa"/>
+  <g fill="#141e34" stroke="#334468"><rect x="16" y="288" width="255" height="146" rx="5"/><rect x="282" y="288" width="255" height="146" rx="5"/><rect x="551" y="288" width="233" height="146" rx="5"/></g>
+  <g fill="#e2e8f6" font-family="monospace" font-size="11"><text x="29" y="310">refresh token cache</text><text x="295" y="310">fix flaky login test</text><text x="563" y="310">NEEDS YOU</text><text x="563" y="342">review migration    t3</text><text x="563" y="360">web / verify</text><text x="29" y="341">working</text><text x="295" y="341">idle</text></g>
+</svg>

@@ -1,0 +1,21 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="800" height="450" viewBox="0 0 800 450">
+  <path fill="#020604" d="M0 0h800v450H0z"/>
+  <g fill="none" stroke="#1a462e">
+    <path d="M0 28h800M0 180h800M0 208h800M600 28v152M400 208v242"/>
+    <path d="M28 60h42v100H28zM92 60h42v100H92zM156 60h42v100h-42zM240 60h42v100h-42zM304 60h42v100h-42zM368 60h42v100h-42z"/>
+  </g>
+  <g font-family="monospace" font-size="11" fill="#83b795">
+    <text x="18" y="18" fill="#d8ffe4">FALLING CODE</text><text x="28" y="48">SECTOR api / main</text><text x="240" y="48">SECTOR web / ui</text>
+    <text x="40" y="80">t3</text><text x="104" y="80">t4</text><text x="168" y="80">t5</text><text x="252" y="80">t7</text><text x="316" y="80">t8</text><text x="380" y="80">t9</text>
+    <text x="40" y="100" fill="#59e58c">7<tspan x="40" dy="15">K</tspan><tspan x="40" dy="15">3</tspan><tspan x="40" dy="15">Z</tspan></text>
+    <text x="108" y="100" fill="#d8ffe4">D<tspan x="108" dy="15">O</tspan><tspan x="108" dy="15">N</tspan><tspan x="108" dy="15">E</tspan></text>
+    <text x="172" y="100" fill="#527b61">0<tspan x="172" dy="15">:</tspan><tspan x="172" dy="15">1</tspan><tspan x="172" dy="15">.</tspan></text>
+    <text x="246" y="108" fill="#f1fff5">PICK<tspan x="254" dy="17">UP</tspan><tspan x="246" dy="17">PICK</tspan></text>
+    <text x="320" y="100" fill="#527b61">4<tspan x="320" dy="15">V</tspan><tspan x="320" dy="15">1</tspan></text><text x="385" y="143">_</text>
+    <text x="616" y="48" fill="#f1fff5">NEEDS YOU / 01</text><text x="616" y="80">t7 / question</text><text x="616" y="100">choose auth flow</text><text x="616" y="120">web / ui</text>
+    <text x="18" y="198" fill="#f1fff5">t7 / web / ui / NEEDS YOU: choose auth flow</text>
+    <text x="18" y="230">t3 / api / auth</text><text x="420" y="230">t4 / api / auth</text>
+    <text x="18" y="268" fill="#59e58c">&gt; refreshing token cache</text><text x="420" y="268">done. tests green</text>
+    <text x="18" y="430" fill="#527b61">LAYOUT ILLUSTRATION / NOT A RUNTIME CAPTURE</text>
+  </g>
+</svg>

@@ -1,0 +1,20 @@
+{
+  "layout:queue": {
+    "ctrl-shift-g": "queue.focus",
+    "ctrl-shift-j": "queue.down",
+    "ctrl-shift-k": "queue.up",
+    "ctrl-shift-n": "queue.next-blocked",
+    "ctrl-shift-x": "queue.settle",
+    "ctrl-shift-s": "queue.snooze",
+    "ctrl-shift-f": "queue.filter",
+    "ctrl-shift-1": "queue.space-1",
+    "ctrl-shift-2": "queue.space-2",
+    "ctrl-shift-3": "queue.space-3",
+    "ctrl-shift-4": "queue.space-4",
+    "ctrl-shift-5": "queue.space-5",
+    "ctrl-shift-6": "queue.space-6",
+    "ctrl-shift-7": "queue.space-7",
+    "ctrl-shift-8": "queue.space-8",
+    "ctrl-shift-9": "queue.space-9"
+  }
+}

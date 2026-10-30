@@ -1,0 +1,58 @@
+{
+  "id": "noir-root",
+  "type": "row",
+  "theme": "noir",
+  "font": "JetBrains Mono",
+  "font_size": 13,
+  "ui_font": "Geist Mono",
+  "terminal_padding": [12, 14],
+  "terminal_opacity": 0.94,
+  "background": { "image": "mods/noir/blinds.png", "fit": "cover" },
+  "preview": "mods/noir/preview.svg",
+  "resizable": false,
+  "children": [
+    {
+      "id": "noir-hallway",
+      "type": "block",
+      "size": { "px": 180 },
+      "content": { "mod": "noir", "props": { "role": "hallway" } },
+      "border": { "width": 1, "color": "border" }
+    },
+    {
+      "id": "noir-office",
+      "type": "column",
+      "resizable": false,
+      "children": [
+        {
+          "id": "noir-folders",
+          "type": "block",
+          "size": { "px": 70 },
+          "content": { "mod": "noir", "props": { "role": "folders" } }
+        },
+        {
+          "id": "noir-live",
+          "type": "block",
+          "size": { "weight": 1 },
+          "padding": [12, 14],
+          "content": {
+            "tab": "active",
+            "pane": {
+              "gap": 12,
+              "radius": 0,
+              "background": "#20202008",
+              "border": { "width": 1, "color": "#656565" },
+              "focus": { "width": 2, "color": "#dddddd" },
+              "header": {
+                "height": 74,
+                "position": "top",
+                "reveal": "always",
+                "content": { "mod": "noir", "props": { "role": "header" } }
+              },
+              "lone": true
+            }
+          }
+        }
+      ]
+    }
+  ]
+}

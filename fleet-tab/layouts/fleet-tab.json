@@ -1,0 +1,129 @@
+{
+  "id": "fleet-tab-root",
+  "type": "column",
+  "titlebar": "none",
+  "traffic_lights": [
+    20,
+    16
+  ],
+  "theme": "fleet-tab",
+  "font": "Geist Mono",
+  "font_size": 13,
+  "ui_font": "Geist Mono",
+  "terminal_padding": [
+    8,
+    12
+  ],
+  "background": "canvas",
+  "resizable": false,
+  "children": [
+    {
+      "id": "fleet-tab-topbar",
+      "type": "block",
+      "size": {
+        "px": 44
+      },
+      "window_drag": true,
+      "content": {
+        "mod": "fleet-tab",
+        "props": {
+          "role": "topbar"
+        }
+      }
+    },
+    {
+      "id": "fleet-tab-body",
+      "type": "row",
+      "resizable": false,
+      "divider": {
+        "width": 1,
+        "color": "border"
+      },
+      "children": [
+        {
+          "id": "sidebar",
+          "type": "block",
+          "size": {
+            "px": 384
+          },
+          "min": 320,
+          "content": {
+            "mod": "fleet-tab",
+            "props": {
+              "role": "sidebar"
+            }
+          }
+        },
+        {
+          "id": "fleet-tab-work",
+          "type": "column",
+          "resizable": false,
+          "children": [
+            {
+              "id": "fleet-tab-tabs",
+              "type": "block",
+              "size": {
+                "px": 44
+              },
+              "content": {
+                "mod": "fleet-tab",
+                "props": {
+                  "role": "tabs"
+                }
+              }
+            },
+            {
+              "id": "fleet-tab-live",
+              "type": "block",
+              "padding": [
+                0,
+                12
+              ],
+              "content": {
+                "tab": "active",
+                "pane": {
+                  "gap": 8,
+                  "radius": 0,
+                  "background": "background",
+                  "lone": true,
+                  "border": {
+                    "width": 1,
+                    "color": "border"
+                  },
+                  "focus": {
+                    "width": 1,
+                    "color": "accent"
+                  },
+                  "header": {
+                    "content": {
+                      "mod": "fleet-tab",
+                      "props": {
+                        "role": "pane"
+                      }
+                    },
+                    "height": 32,
+                    "position": "top",
+                    "reveal": "always"
+                  }
+                }
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "fleet-tab-status",
+      "type": "block",
+      "size": {
+        "px": 28
+      },
+      "content": {
+        "mod": "fleet-tab",
+        "props": {
+          "role": "status"
+        }
+      }
+    }
+  ]
+}

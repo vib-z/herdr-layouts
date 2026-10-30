@@ -1,0 +1,5 @@
+{
+  "private": true,
+  "type": "module",
+  "scripts": { "check": "node checks/verify.mjs && node checks/render-fixture.mjs" }
+}

@@ -1,0 +1,25 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1600" height="900" viewBox="0 0 1600 900">
+  <defs><pattern id="light" width="1200" height="78" patternUnits="userSpaceOnUse" patternTransform="rotate(-14)"><rect width="1200" height="23" fill="#ffffff" opacity="0.04"/></pattern></defs>
+  <rect width="1600" height="900" fill="#202020"/><rect x="180" y="94" width="1420" height="806" fill="url(#light)"/>
+  <rect width="180" height="900" fill="#1d1d1d"/><path d="M180 0v900M0 155h180M0 432h180" stroke="#4c4c4c"/>
+  <g font-family="monospace" fill="#e0e0e0">
+    <text x="16" y="40" font-size="11" fill="#aaaaaa">HERDR / EST. 1947</text><text x="16" y="79" font-size="24" font-weight="bold">THE NOIR</text><text x="16" y="107" font-size="24" font-weight="bold">OFFICE</text><text x="16" y="133" font-size="10" fill="#929292">PRIVATE INVESTIGATIONS</text>
+    <text x="12" y="184" font-size="11" fill="#dc5b55">CLIENTS WAITING / 3</text>
+    <g fill="#482221" stroke="#dc5b55"><rect x="10" y="200" width="160" height="64"/><rect x="10" y="273" width="160" height="64"/><rect x="10" y="346" width="160" height="64"/></g>
+    <g font-size="11" fill="#ffe2df"><text x="20" y="220">! refresh token cache</text><text x="20" y="239" font-size="10">api / auth</text><text x="20" y="254" font-size="10">t7 / focus</text><text x="20" y="293">! review migration</text><text x="20" y="312" font-size="10">ops / database</text><text x="20" y="327" font-size="10">remote/t9 / focus</text><text x="20" y="366">! inspect failure</text><text x="20" y="385" font-size="10">web / regression</text><text x="20" y="400" font-size="10">t11 / child, peek</text></g>
+    <text x="12" y="459" font-size="10" fill="#929292">HALLWAY / ALL SPACES</text>
+    <g stroke="#777777" fill="#353535"><rect x="10" y="475" width="160" height="92"/><rect x="10" y="577" width="160" height="92"/></g><rect x="10" y="679" width="160" height="92" fill="#482221" stroke="#dc5b55"/>
+    <text x="23" y="508" font-size="17">api</text><text x="23" y="610" font-size="17">web</text><text x="23" y="712" font-size="17" fill="#ffe2df">ops</text>
+    <g font-size="10" fill="#b2b2b2"><text x="23" y="530">PRIVATE INVESTIGATIONS</text><text x="23" y="632">PRIVATE INVESTIGATIONS</text><text x="23" y="734">REMOTE / remote</text></g>
+    <g fill="#eeeeee"><rect x="23" y="544" width="12" height="5"/><rect x="40" y="544" width="12" height="5"/><rect x="23" y="646" width="12" height="5"/></g><g fill="#dc5b55"><rect x="57" y="544" width="12" height="5"/><rect x="40" y="646" width="12" height="5"/><rect x="23" y="748" width="12" height="5"/></g>
+    <rect x="180" width="1420" height="94" fill="#1d1d1d"/><text x="201" y="27" font-size="11" fill="#aaaaaa">CASE FILES / api</text><text x="1435" y="27" font-size="10" fill="#929292">CONFIDENTIAL</text>
+    <rect x="200" y="42" width="250" height="40" fill="#c6c6c6" stroke="#eeeeee"/><rect x="458" y="42" width="250" height="40" fill="#535353" stroke="#777777"/><rect x="716" y="42" width="250" height="40" fill="#482221" stroke="#dc5b55"/>
+    <text x="215" y="67" font-size="14" fill="#202020">CASE 1: auth</text><text x="473" y="67" font-size="14">CASE 2: cache</text><text x="731" y="67" font-size="14" fill="#ffe2df">CASE 3: permissions</text>
+    <g stroke="#777777" fill="#343434"><rect x="200" y="111" width="676" height="74"/><rect x="892" y="111" width="688" height="74"/><rect x="892" y="496" width="688" height="74"/></g><rect x="200" y="496" width="676" height="74" fill="#482221" stroke="#dc5b55"/>
+    <g font-size="16"><text x="221" y="142">T3 . PRIVATE INVESTIGATIONS</text><text x="913" y="142">T4 . PRIVATE INVESTIGATIONS</text><text x="221" y="527" fill="#ffe2df">T7 . A CLIENT IS WAITING</text><text x="913" y="527" fill="#aaaaaa">T5 . OUT TO LUNCH</text></g>
+    <g font-size="12" fill="#b2b2b2"><text x="221" y="166">trace the connection leak</text><text x="913" y="166">CASE CLOSED.</text><text x="221" y="551" fill="#ffe2df">permission required to continue</text><text x="913" y="551">fix flaky login test</text></g>
+    <g font-size="15" fill="#d0d0d0"><text x="221" y="221">&gt; tracing the connection pool</text><text x="221" y="249">&gt; isolated the leak, patching</text><text x="913" y="221">&gt; checks passed</text><text x="913" y="249">&gt; ready for review</text><text x="221" y="606">&gt; waiting for your response</text><text x="913" y="606">&gt; idle</text></g>
+    <path d="M200 480h1380M883 111v758" stroke="#606060"/>
+    <text x="16" y="849" font-size="10" fill="#929292">SILENT OFFICE</text><text x="200" y="882" font-size="11" fill="#aaaaaa">DESIGN ILLUSTRATION / LIVE CAPTURE PENDING</text>
+  </g>
+</svg>

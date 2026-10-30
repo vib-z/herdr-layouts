@@ -1,0 +1,27 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1600" height="900" viewBox="0 0 1600 900">
+  <rect width="1600" height="900" fill="#151619"/>
+  <rect width="1600" height="48" fill="#202126"/>
+  <path d="M480 48v852M0 48h1600" stroke="#383940"/>
+  <g font-family="Geist, sans-serif" fill="#e3e3e8">
+    <text x="24" y="30" font-size="15" font-weight="700">QUEUE</text>
+    <g font-size="13"><text x="125" y="30" fill="#b6a5ff">All 10</text><text x="207" y="30">Today</text><text x="303" y="30">1 api 4</text><text x="400" y="30">2 web 3</text><text x="510" y="30">3 ops 3</text><text x="1220" y="30" fill="#ee8a72">3 need you</text><text x="1390" y="30">Still</text><text x="1480" y="30">/ Filter</text></g>
+    <text x="20" y="88" font-size="18" font-weight="600">Your queue</text><text x="20" y="126" font-size="11" fill="#ee8a72">NEEDS YOU  3</text>
+    <g fill="#302326" stroke="#684139"><rect x="12" y="142" width="456" height="92" rx="4"/><rect x="12" y="242" width="456" height="92" rx="4"/><rect x="12" y="342" width="456" height="92" rx="4"/></g>
+    <g fill="#ee8a72"><rect x="25" y="158" width="15" height="15"/><rect x="25" y="258" width="15" height="15"/><rect x="25" y="358" width="15" height="15"/></g>
+    <g fill="#151619" font-size="12" font-weight="700"><text x="30" y="170">!</text><text x="30" y="270">!</text><text x="30" y="370">!</text></g>
+    <g font-size="14" font-weight="600"><text x="58" y="172">a   Migrate schema</text><text x="58" y="272">b   Fix flaky login test</text><text x="58" y="372">c   Review cache policy</text></g>
+    <g font-size="11" fill="#a8a8b5"><text x="25" y="194">api / #schema · t3</text><text x="25" y="294">web / #tests · t6 · settled tab</text><text x="25" y="394">ops / #cache · remote/t2 · child</text><text x="25" y="217">Reply / open approval in terminal</text><text x="25" y="317">Reply / open approval in terminal</text><text x="25" y="417">Reply / open approval in terminal</text></g>
+    <g font-size="11" fill="#93939f"><text x="20" y="472">DONE  1</text><text x="20" y="550">WORKING  4</text><text x="20" y="746">IDLE  1</text></g>
+    <g font-size="13"><text x="58" y="506">d   Write tests             #api      2m</text><text x="58" y="586">e   Refresh token cache      #api      6m</text><text x="58" y="622">f   Add rate limit           #api     11m</text><text x="58" y="658">g   Docs sweep               #web     23m</text><text x="58" y="694">h   Audit retries            #ops      4m</text><text x="58" y="783" fill="#93939f">i   Spike                  #scratch   40m</text></g>
+    <circle cx="32" cy="501" r="8" fill="#76bd94"/><path d="m28 501 3 3 5-6" fill="none" stroke="#151619" stroke-width="2"/>
+    <g fill="none" stroke="#b6a5ff" stroke-width="2"><circle cx="32" cy="581" r="8"/><circle cx="32" cy="617" r="8"/><circle cx="32" cy="653" r="8"/><circle cx="32" cy="689" r="8"/></g>
+    <circle cx="32" cy="778" r="8" fill="none" stroke="#93939f" stroke-dasharray="3 2"/>
+    <path d="M0 818h480" stroke="#383940"/><text x="20" y="846" font-size="12" fill="#93939f">&gt; Closed 1 · unavailable 0</text><text x="20" y="878" font-size="10" fill="#93939f">Check exits                 Confirmed exits only</text>
+    <text x="505" y="83" font-size="14">api / #schema</text><text x="1435" y="83" font-size="11" fill="#93939f">Settle whole tab</text>
+    <g fill="#101114" stroke="#383940"><rect x="492" y="103" width="546" height="707" rx="4"/><rect x="1044" y="103" width="544" height="707" rx="4"/></g>
+    <g font-family="JetBrains Mono, monospace" font-size="14"><text x="514" y="139" fill="#b6a5ff">Migrate schema</text><text x="514" y="182">Ready to apply the migration.</text><text x="514" y="220" fill="#ee8a72">Drop column legacy_id?</text><text x="514" y="258">Open terminal to review this prompt.</text><text x="1068" y="139" fill="#76bd94">Write tests</text><text x="1068" y="182">14 passed</text><text x="1068" y="220">Waiting for the next task.</text></g>
+    <g font-size="11" fill="#93939f"><text x="505" y="844">LIST: j / k move · Enter open · n next blocker · x settle tab · s snooze · / filter</text><text x="505" y="870">ANYWHERE: Ctrl+Shift+G list · Ctrl+Shift+N next blocker</text></g>
+    <rect x="1135" y="745" width="425" height="40" rx="4" fill="#202126"/>
+    <text x="1153" y="770" font-size="12" fill="#b6a5ff">QUEUE LAYOUT SCHEMATIC</text>
+  </g>
+</svg>
