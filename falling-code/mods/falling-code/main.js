@@ -148,7 +148,7 @@ export default class FallingCode extends View {
     const blocked = live.filter(a => a.status === "blocked");
     const motion = shared(STILL_KEY) !== true && window()?.active === true;
     const fieldWidth = Math.max(96, this.size.width - ATTENTION_WIDTH - 24);
-    const bands = packBands(all, spaces(), fieldWidth);
+    const bands = packBands(all, panes(), fieldWidth);
     const bandHeight = Math.max(156, Math.min(260, this.size.height - 66));
     const hovered = all.find(a => a.address === this.hovered);
     const field = v_flex().id("rain-bands").flex_1().min_h(0).overflow_y_scrollbar().gap(8);
