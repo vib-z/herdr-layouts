@@ -109,15 +109,16 @@ export function precomputeFrames(address, lines = 10) {
 
 // Pack whole sector/tab fragments, preserving 48px columns. At most 20 per band.
 // Overflow wraps into another band, never a horizontal strip of tiny agents.
-export function packBands(list, sectors, width) {
+export function packBands(list, paneList, width) {
   const available = Math.max(96, width);
   const groups = [];
   for (const a of list) {
     let group = groups.find(g => g.space === a.space && g.tab === a.tab);
     if (!group) {
-      const sector = sectors.find(s => s.id === a.space);
+      // A space's branch follows its selected tab; use this tab's first terminal instead.
+      const pane = paneList.find(p => p.tab === a.tab && p.terminal);
       group = { space: a.space, tab: a.tab, name: a.space_name,
-        tabName: a.tab_name, branch: sector?.branch ?? "", agents: [] };
+        tabName: a.tab_name, branch: pane?.branch ?? "", agents: [] };
       groups.push(group);
     }
     group.agents.push(a);

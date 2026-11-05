@@ -9,13 +9,34 @@ const agent = (n, status = "working") => ({ address: `t${n}`, pane: `p${n}`,
   title: `task ${n}`, space: spaces[n % 3].id, space_name: spaces[n % 3].name,
   tab: `tab${n % 3}`, tab_name: "work", status, program: { name: "Agent" } });
 const twenty = Array.from({ length: 20 }, (_, i) => agent(i));
+const panes = twenty.map(a => ({ pane: a.pane, tab: a.tab, terminal: a.address, branch: "main" }));
 for (const width of [660, 1172, 1260]) {
-  const bands = packBands(twenty, spaces, width);
+  const bands = packBands(twenty, panes, width);
   assert.equal(bands.flatMap(b => b.groups.flatMap(g => g.agents)).length, 20);
   assert(bands.every(b => b.width <= width && b.count <= 20));
   if (width === 660) assert(bands.length >= 2);
 }
-assert.equal(packBands(twenty.slice(0, 10), spaces, 660).length, 1);
+assert.equal(packBands(twenty.slice(0, 10), panes, 660).length, 1);
+const tabAgents = [
+  { ...agent(1), space: "web", tab: "first" },
+  { ...agent(2), space: "web", tab: "second" },
+  { ...agent(3), space: "remote/web", tab: "remote/first" },
+];
+const tabPanes = [
+  { pane: "mod", tab: "first", terminal: null, branch: null },
+  { pane: "p1", tab: "first", terminal: "t1", branch: null },
+  { pane: "p2", tab: "second", terminal: "t2", branch: "feature/example" },
+  { pane: "p3", tab: "remote/first", terminal: "remote/t3", branch: "remote-branch" },
+  { pane: "split", tab: "second", terminal: "t4", branch: "other-split" },
+];
+const branches = panes => packBands(tabAgents, panes, 660).flatMap(b => b.groups.map(g => g.branch));
+assert.deepEqual(branches(tabPanes), ["", "feature/example", "remote-branch"]);
+assert.deepEqual(branches(tabPanes.map(p => ({ ...p, focused: p.tab === "second" }))),
+  ["", "feature/example", "remote-branch"]);
+assert.deepEqual(branches(tabPanes.map(p => ({ ...p, branch: null }))), ["", "", ""]);
+assert.deepEqual(branches([]), ["", "", ""]);
+console.log("PASS: per-tab branches, mod-pane exclusion, stable first-terminal selection, remote tabs and missing branch data");
+
 const frames = precomputeFrames("t5");
 assert.deepEqual(frames, precomputeFrames("t5"));
 assert.equal(frames.length, 8);

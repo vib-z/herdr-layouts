@@ -174,3 +174,25 @@ for (const scene of [
   }
 }
 console.log("PASS: rain/alert/header with zero spaces, no focused tab, zero agents, null window; all roles retain a 60-character terminal or report-only title");
+
+const tabAgents = [
+  { ...list[0], tab: "first", tab_name: "1" },
+  { ...list[0], address: "t2", pane: "p2", tab: "second", tab_name: "2" },
+];
+api.agents = () => tabAgents;
+api.terminals = () => tabAgents.map(a => ({ ...a, state: "live" }));
+api.panes = () => tabAgents.map((a, i) => ({ ...a, terminal: a.address,
+  branch: i === 0 ? null : "feature/example" }));
+api.window = () => ({ active: true });
+role = "rain";
+store.clear();
+const tabView = new Mod();
+tabView.init({}, cx);
+for (const selected of ["first", "second", "first"]) {
+  api.spaces = () => [{ ...spaces[0], branch: selected === "first" ? null : "feature/example",
+    tabs: tabAgents.map(a => ({ id: a.tab, name: a.tab_name, active: a.tab === selected })) }];
+  const root = tabView.render(cx);
+  assert.equal(byId(root, "sector-select-0-0").values.tooltip[0], "api / branch unreported");
+  assert.equal(byId(root, "sector-select-0-1").values.tooltip[0], "api / feature/example");
+}
+console.log("PASS: switching tabs does not copy the selected space branch into another tab's header");
